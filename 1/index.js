@@ -259,3 +259,219 @@ function bai11() {
     })
 }
 bai11()
+
+// Bài 12
+function mergeAndRemoveDuplicates(str1, str2) {
+
+    const arr1 = str1.split('').map(char => char.trim());
+    const arr2 = str2.split('').map(char => char.trim());
+
+    const uniqueArray  = [...new Set([...arr1, ...arr2])];
+    return uniqueArray;
+}
+function bai12() {
+    const btn = document.querySelector('.bai-12 button')
+    const input1 = document.querySelector('.bai-12 .arr1')
+    const input2 = document.querySelector('.bai-12 .arr2')
+    let result = document.querySelector('.bai-12 .result')
+    btn.addEventListener('click', () => {
+        const str1 = input1.value;
+        const str2 = input2.value;
+
+        const commonElements = mergeAndRemoveDuplicates(str1, str2);
+        result.innerText = JSON.stringify(commonElements);
+    })
+}
+bai12()
+// Bài 13
+function findUniqueElements(str1, str2) {
+
+    const arr1 = str1.split('').map(char => char.trim());
+    const arr2 = str2.split('').map(char => char.trim());
+
+    const uniqueArray1  = arr1.filter(element => !arr2.includes(element));
+    const uniqueArray2  = arr2.filter(element => !arr1.includes(element));
+
+    return [...uniqueArray1, ...uniqueArray2];
+}
+function bai13() {
+    const btn = document.querySelector('.bai-13 button')
+    const input1 = document.querySelector('.bai-13 .arr1')
+    const input2 = document.querySelector('.bai-13 .arr2')
+    let result = document.querySelector('.bai-13 .result')
+    btn.addEventListener('click', () => {
+        const str1 = input1.value;
+        const str2 = input2.value;
+
+        const commonElements = findUniqueElements(str1, str2);
+        result.innerText = JSON.stringify(commonElements);
+    })
+}
+bai13()
+
+// Bài 16
+function squareOddNumbers(str) {
+    var arr = str.split('')
+    const squareNumbers = arr.filter(num => num % 2 !== 0).map(num => num * num)
+    return squareNumbers
+}
+function bai16() {
+    const btn = document.querySelector('.bai-16 button')
+    const input = document.querySelector('.bai-16 input')
+    let value
+    let result = document.querySelector('.bai-16 .result')
+    btn.addEventListener('click', () => {
+        value = squareOddNumbers(input.value)
+        result.innerText = JSON.stringify(value)
+    })
+}
+bai16()
+
+// Bài 17
+function filterNamesByFirstChar(nameStr, filterChar) {
+    var nameArr = nameStr.split(',').map(name => name.trim())
+    var filterNames = nameArr.filter(name => name[0] === filterChar);
+    return filterNames;
+}
+function bai17() {
+    const btn = document.querySelector('.bai-17 button')
+    const inputNames = document.querySelector('.bai-17 .arr1')
+    const inputChar = document.querySelector('.bai-17 .filterChar')
+    let result = document.querySelector('.bai-17 .result')
+    btn.addEventListener('click', () => {
+        const namesString = inputNames.value;
+        const filterChar = inputChar.value;
+        if (filterChar.length !== 1) {
+            result.innerText = 'Kí tự đầu phải là 1 kí tự duy nhất'
+            return
+        }
+        const filterNames = filterNamesByFirstChar(namesString, filterChar);
+        result.innerText = JSON.stringify(filterNames)
+    })
+}
+bai17()
+
+// Bài 18
+function myF(str) {
+
+}
+function bai18() {
+    const btn = document.querySelector('.bai-18 button')
+    const input = document.querySelector('.bai-18 input')
+    let value
+    let result = document.querySelector('.bai-18 .result')
+    btn.addEventListener('click', () => {
+        value = (input.value)
+        result.innerText = value
+    })
+}
+bai18()
+
+// Bài 19
+function myF(str) {
+
+}
+function bai19() {
+    const btn = document.querySelector('.bai-19 button')
+    const input = document.querySelector('.bai-19 input')
+    let value
+    let result = document.querySelector('.bai-19 .result')
+    btn.addEventListener('click', () => {
+        value = (input.value)
+        result.innerText = value
+    })
+}
+bai19()
+
+// Bài 20
+function myF(str) {
+
+}
+function bai20() {
+    const btn = document.querySelector('.bai-20 button')
+    const input = document.querySelector('.bai-20 input')
+    let value
+    let result = document.querySelector('.bai-20 .result')
+    btn.addEventListener('click', () => {
+        value = (input.value)
+        result.innerText = value
+    })
+}
+bai20()
+
+// Bài 21
+function calculateAverage(str) {
+    const arr = str.split(',').map(Number);
+    if (arr.some(isNaN)) {
+        return 'Đầu vào không hợp lệ, vui lòng nhập các chữ số, cách nhau bằng dấu phẩy'
+    }
+
+    const sum = arr.reduce((acc, cur) => acc + cur,0);
+    const average = sum / arr.length;
+    return average;
+}
+function bai21() {
+    const btn = document.querySelector('.bai-21 button')
+    const input = document.querySelector('.bai-21 input')
+    let value
+    let result = document.querySelector('.bai-21 .result')
+    btn.addEventListener('click', () => {
+        value = calculateAverage(input.value)
+        result.innerText = value
+    })
+}
+bai21()
+
+// Bài 22
+function calculateAge(str) {
+    const parts = str.split('/');
+    const day = parseInt(parts[0])
+    const month = parseInt(parts[1]) 
+    const year = parseInt(parts[2])
+
+    const birthDate = new Date(year, month -1 , day);
+    const today = new Date();
+    
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const hasHadBirthdayThisYear = (
+        today.getMonth() > birthDate.getMonth() ||
+        (today.getMonth() === birthDate.getMonth() && today.getDate() >= birthDate.getDate())
+    )
+
+    if (!hasHadBirthdayThisYear) {
+        age--;
+    }
+    
+    return age;
+}
+function bai22() {
+    const btn = document.querySelector('.bai-22 button')
+    const input = document.querySelector('.bai-22 input')
+    let result = document.querySelector('.bai-22 .result')
+    btn.addEventListener('click', () => {
+        const birthdateStr = input.value;
+        const age = calculateAge(birthdateStr);
+        result.innerText = `Tuổi của bạn là: ${age}`;
+    })
+}
+bai22()
+
+// Bài 23
+function calculateDateDifference(dateStr) {
+    const parts = dateStr.split('/');
+    const day = parseInt(parts[0]);
+    const month = parseInt(parts[1]) - 1;
+    const year = parseInt(parts[2]);
+    const selectedDate = new Date(year, month, day);
+}
+function bai23() {
+    const btn = document.querySelector('.bai-23 button')
+    const input = document.querySelector('.bai-23 input')
+    let value
+    let result = document.querySelector('.bai-23 .result')
+    btn.addEventListener('click', () => {
+        value = (input.value)
+        result.innerText = value
+    })
+}
+bai23()
