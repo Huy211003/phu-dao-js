@@ -266,7 +266,7 @@ function mergeAndRemoveDuplicates(str1, str2) {
     const arr1 = str1.split('').map(char => char.trim());
     const arr2 = str2.split('').map(char => char.trim());
 
-    const uniqueArray  = [...new Set([...arr1, ...arr2])];
+    const uniqueArray = [...new Set([...arr1, ...arr2])];
     return uniqueArray;
 }
 function bai12() {
@@ -289,8 +289,8 @@ function findUniqueElements(str1, str2) {
     const arr1 = str1.split('').map(char => char.trim());
     const arr2 = str2.split('').map(char => char.trim());
 
-    const uniqueArray1  = arr1.filter(element => !arr2.includes(element));
-    const uniqueArray2  = arr2.filter(element => !arr1.includes(element));
+    const uniqueArray1 = arr1.filter(element => !arr2.includes(element));
+    const uniqueArray2 = arr2.filter(element => !arr1.includes(element));
 
     return [...uniqueArray1, ...uniqueArray2];
 }
@@ -352,24 +352,36 @@ function bai17() {
 bai17()
 
 // Bài 18
-function myF(str) {
+const shoppingCart = [
+    { name: "Shirt", price: 20, discount: 0.1 },
+    { name: "Jeans", price: 40, discount: 0.2 },
+    { name: "Shoes", price: 60, discount: 0.15 }
+];
 
+function totalPrice(str) {
+    var arr = JSON.parse(str)
+    var result = arr.reduce((acc, cur) => acc + cur.price, 0);
+    return result;
 }
 function bai18() {
     const btn = document.querySelector('.bai-18 button')
     const input = document.querySelector('.bai-18 input')
     let value
+
     let result = document.querySelector('.bai-18 .result')
     btn.addEventListener('click', () => {
-        value = (input.value)
+        console.log(input.value);
+        value = totalPrice(input.value)
         result.innerText = value
     })
 }
 bai18()
 
 // Bài 19
-function myF(str) {
-
+function flatArray(str) {
+    var arr = JSON.parse(str)
+    var result = arr.reduce((acc, cur) => acc.concat(cur), []);
+    return result;
 }
 function bai19() {
     const btn = document.querySelector('.bai-19 button')
@@ -377,15 +389,24 @@ function bai19() {
     let value
     let result = document.querySelector('.bai-19 .result')
     btn.addEventListener('click', () => {
-        value = (input.value)
+        value = flatArray(input.value)
         result.innerText = value
     })
 }
 bai19()
 
 // Bài 20
-function myF(str) {
+const students = [
+    { "name": "Alice", "score": 80 },
+    { "name": "Bob", "score": 55 },
+    { "name": "Charlie", "score": 90 },
+    { "name": "Dave", "score": 70 }
+]
 
+function filterStudentsByScore(str) {
+    var arr = JSON.parse(str)
+    var result = arr.filter(students => students.score >= 70).map(item => item.name);
+    return result
 }
 function bai20() {
     const btn = document.querySelector('.bai-20 button')
@@ -393,7 +414,7 @@ function bai20() {
     let value
     let result = document.querySelector('.bai-20 .result')
     btn.addEventListener('click', () => {
-        value = (input.value)
+        value = filterStudentsByScore(input.value)
         result.innerText = value
     })
 }
@@ -406,7 +427,7 @@ function calculateAverage(str) {
         return 'Đầu vào không hợp lệ, vui lòng nhập các chữ số, cách nhau bằng dấu phẩy'
     }
 
-    const sum = arr.reduce((acc, cur) => acc + cur,0);
+    const sum = arr.reduce((acc, cur) => acc + cur, 0);
     const average = sum / arr.length;
     return average;
 }
@@ -426,12 +447,12 @@ bai21()
 function calculateAge(str) {
     const parts = str.split('/');
     const day = parseInt(parts[0])
-    const month = parseInt(parts[1]) 
+    const month = parseInt(parts[1])
     const year = parseInt(parts[2])
 
-    const birthDate = new Date(year, month -1 , day);
+    const birthDate = new Date(year, month - 1, day);
     const today = new Date();
-    
+
     let age = today.getFullYear() - birthDate.getFullYear();
     const hasHadBirthdayThisYear = (
         today.getMonth() > birthDate.getMonth() ||
@@ -441,7 +462,7 @@ function calculateAge(str) {
     if (!hasHadBirthdayThisYear) {
         age--;
     }
-    
+
     return age;
 }
 function bai22() {
