@@ -20,9 +20,9 @@ document.getElementById('load-products-btn').addEventListener('click', async () 
 document.getElementById('show-products-btn').addEventListener('click', () => {
     const productList = document.getElementById('product-list');
     productList.innerHTML = products.map(product => {
-        const discountVariant = product.variants.find(variant => variant.discount > 0);
+        const discountVariant = product.variants.find(variant => variant.compareAtPrice > variant.price);
         const variant = discountVariant || product.variants[0];
-        const discountText = variant.discount ? `Discount: ${variant.discount}%` : '';
+        const discountText = discountVariant ? `Discount: ${((variant.compareAtPrice - variant.price) / variant.compareAtPrice * 100).toFixed(2)}%` : '';
         const optionsText = product.options.map(option => `${option.name}: ${option.values.join(', ')}`).join('<br>');
         return `<div>
                     <h4>${product.title}</h4>
