@@ -63,9 +63,9 @@ document.getElementById('search-input').addEventListener('input', debounce(async
             searchResult.textContent = 'Không có sản phẩm nào khớp với từ khoá cần tìm';
         } else {
             searchResult.innerHTML = searchProducts.map(product => {
-                const discountVariant = product.variants.find(variant => variant.discount > 0);
+                const discountVariant = product.variants.find(variant => variant.compareAtPrice > variant.price);
                 const variant = discountVariant || product.variants[0];
-                const discountText = variant.discount ? `Discount: ${variant.discount}%` : '';
+                const discountText = discountVariant ? `Discount: ${((variant.compareAtPrice - variant.price) / variant.compareAtPrice * 100).toFixed(2)}%` : '';
                 const optionsText = product.options.map(option => `${option.name}: ${option.values.join(', ')}`).join('<br>');
                 return `<div>
                             <h4>${product.title}</h4>
@@ -80,3 +80,4 @@ document.getElementById('search-input').addEventListener('input', debounce(async
         console.error(error);
     }
 }));
+
