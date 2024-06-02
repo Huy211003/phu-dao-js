@@ -18,14 +18,14 @@ document.getElementById('load-products-btn').addEventListener('click', async () 
 });
 
 document.getElementById('show-products-btn').addEventListener('click', () => {
-    const productList = document.getElementById('product-list');
-    productList.innerHTML = products.map(product => {
+    const productList = document.getElementById('result');
+    productList.innerHTML = products.map((product, index) => {
         const discountVariant = product.variants.find(variant => variant.compareAtPrice > variant.price);
         const variant = discountVariant || product.variants[0];
         const discountText = discountVariant ? `Discount: ${((variant.compareAtPrice - variant.price) / variant.compareAtPrice * 100).toFixed(2)}%` : '';
         const optionsText = product.options.map(option => `${option.name}: ${option.values.join(', ')}`).join('<br>');
         return `<div>
-                    <h4>${product.title}</h4>
+                    <h4>${index + 1}. ${product.title}</h4>
                     <p>${optionsText}</p>
                     <p>Price: ${variant.price}</p>
                     <p>${discountText}</p>
@@ -45,7 +45,7 @@ function debounce(callback, delay = 300) {
 
 document.getElementById('search-input').addEventListener('input', debounce(async (event) => {
     const query = event.target.value.trim();
-    const searchResult = document.getElementById('search-result');
+    const searchResult = document.getElementById('result');
 
     if (query === '') {
         searchResult.textContent = 'Vui lòng nhập từ khoá cần tìm';
@@ -62,13 +62,13 @@ document.getElementById('search-input').addEventListener('input', debounce(async
         if (searchProducts.length === 0) {
             searchResult.textContent = 'Không có sản phẩm nào khớp với từ khoá cần tìm';
         } else {
-            searchResult.innerHTML = searchProducts.map(product => {
+            searchResult.innerHTML = searchProducts.map((product, index) => {
                 const discountVariant = product.variants.find(variant => variant.compareAtPrice > variant.price);
                 const variant = discountVariant || product.variants[0];
                 const discountText = discountVariant ? `Discount: ${((variant.compareAtPrice - variant.price) / variant.compareAtPrice * 100).toFixed(2)}%` : '';
                 const optionsText = product.options.map(option => `${option.name}: ${option.values.join(', ')}`).join('<br>');
                 return `<div>
-                            <h4>${product.title}</h4>
+                            <h4>${index + 1}. ${product.title}</h4>
                             <p>${optionsText}</p>
                             <p>Price: ${variant.price}</p>
                             <p>${discountText}</p>
